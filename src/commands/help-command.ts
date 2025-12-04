@@ -151,17 +151,18 @@ Claude Code Profile & Model Switcher`.trim();
     'CLI Proxy (OAuth Providers)',
     [
       'Zero-config OAuth authentication via CLIProxyAPI',
-      'First run: Browser opens for authentication',
+      'First run: Browser opens for authentication, then model selection',
       'Settings: ~/.ccs/{provider}.settings.json (created after auth)',
     ],
     [
-      ['ccs gemini', 'Google Gemini (gemini-2.5-pro)'],
+      ['ccs gemini', 'Google Gemini (gemini-2.5-pro or 3-pro)'],
       ['ccs codex', 'OpenAI Codex (gpt-5.1-codex-max)'],
-      ['ccs agy', 'Antigravity (gemini-3-pro-preview)'],
+      ['ccs agy', 'Antigravity (Claude/Gemini models)'],
       ['ccs qwen', 'Qwen Code (qwen3-coder)'],
       ['ccs iflow', 'iFlow (multiple models)'],
       ['', ''], // Spacer
       ['ccs <provider> --auth', 'Authenticate only'],
+      ['ccs <provider> --config', 'Change model (agy, gemini)'],
       ['ccs <provider> --logout', 'Clear authentication'],
       ['ccs <provider> --headless', 'Headless auth (for SSH)'],
       ['ccs codex "explain code"', 'Use with prompt'],
@@ -185,6 +186,8 @@ Claude Code Profile & Model Switcher`.trim();
     ['ccs doctor', 'Run health check and diagnostics'],
     ['ccs sync', 'Sync delegation commands and skills'],
     ['ccs update', 'Update CCS to latest version'],
+    ['ccs update --force', 'Force reinstall current version'],
+    ['ccs update --beta', 'Install from dev channel (unstable)'],
   ]);
 
   // Flags
@@ -200,6 +203,13 @@ Claude Code Profile & Model Switcher`.trim();
     ['Profiles:', '~/.ccs/profiles.json'],
     ['Instances:', '~/.ccs/instances/'],
     ['Settings:', '~/.ccs/*.settings.json'],
+  ]);
+
+  // CLI Proxy management
+  printSubSection('CLI Proxy Management', [
+    ['ccs cliproxy', 'Show CLIProxyAPI status and version'],
+    ['ccs cliproxy --install <ver>', 'Install specific version (e.g., 6.5.40)'],
+    ['ccs cliproxy --latest', 'Update to latest version'],
   ]);
 
   // CLI Proxy paths
@@ -225,6 +235,17 @@ Claude Code Profile & Model Switcher`.trim();
     `  $ ${color('ccs gemini', 'command')}              ${dim('# OAuth (browser opens first time)')}`
   );
   console.log(`  $ ${color('ccs glm "implement API"', 'command')} ${dim('# API key model')}`);
+  console.log('');
+
+  // Update examples
+  console.log(subheader('Update:'));
+  console.log(
+    `  $ ${color('ccs update', 'command')}              ${dim('# Update to latest stable')}`
+  );
+  console.log(
+    `  $ ${color('ccs update --force', 'command')}      ${dim('# Force reinstall current')}`
+  );
+  console.log(`  $ ${color('ccs update --beta', 'command')}       ${dim('# Install dev channel')}`);
   console.log('');
 
   // Docs link
